@@ -1,0 +1,18 @@
+const mongoose = require("mongoose");
+
+const CartSchema = new mongoose.Schema(
+  {
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    items: [
+      {
+        productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
+        quantity: { type: Number, default: 1 },
+        price: { type: Number }, // Optional: save the price at the time of adding
+      },
+    ],
+    total: { type: Number, default: 0 }, // Optional: can also calculate dynamically
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("Cart", CartSchema);

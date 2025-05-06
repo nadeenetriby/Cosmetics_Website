@@ -6,13 +6,9 @@ const productSchema = new mongoose.Schema(
     description: String,
     price: { type: Number, required: true },
     inStock: { type: Number, default: 0 },
-    status: {
-      type: String,
-      enum: ["In Stock", "Out of Stock", "Pending Review"],
-      default: "In Stock",
-    },
     imageUrl: String,
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
+    category: { type: String, required: true },
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }]
   },
   { timestamps: true }
 );
