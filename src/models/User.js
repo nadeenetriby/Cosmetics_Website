@@ -8,8 +8,8 @@ const userSchema = new mongoose.Schema(
     profilePicture: { type: String, default: "" },
     isAdmin: { type: Boolean, default: false },
     favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
-    cardID:{ type: String},
-    cardValue:{ type: Number}
+    cardID: { type: String },
+    cardValue: { type: Number },
   },
   { timestamps: true }
 );
