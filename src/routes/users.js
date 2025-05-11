@@ -12,7 +12,7 @@ router.post("/login", login);
 
 router.put("/promoteEmail", auth, async (req, res) => {
   try {
-    if (req.user.isAdmin) return res.status(401).json({ msg: "unauthorized" });
+    if (!req.user.isAdmin) return res.status(401).json({ msg: "unauthorized" });
 
     const { email } = req.body;
 
@@ -25,6 +25,7 @@ router.put("/promoteEmail", auth, async (req, res) => {
       return res.status(400).json({ msg: "This user is already an admin." });
 
     user.isAdmin = true;
+    await user.save();
 
     res.json({ msg: `User with email ${email} has been promoted to admin.` });
   } catch (error) {

@@ -5,6 +5,8 @@ const mongoose = require("mongoose"); // Ensure you import mongoose correctly
 const dotenv = require("dotenv"); // For loading environment variables
 const userRoutes = require("./routes/users"); // Import user routes
 const admin = require("./Admin/admin");
+const reviews = require("./routes/reviews");
+const product = require("./routes/products");
 
 // Load environment variables from .env file
 dotenv.config();
@@ -34,13 +36,15 @@ app.use(express.json()); // This middleware is crucial for handling POST/PUT req
 
 // Use user routes for user-related API endpoints
 app.use("/api/user", userRoutes);
+app.use("/api/product", product);
+app.use("/api/product/reviews", reviews);
 
 // Basic route (optional, for testing purposes)
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-const port = 8080; // Or any port of your choice
+const port = 3000; // Or any port of your choice
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

@@ -23,7 +23,10 @@ const register = async (req, res) => {
       });
 
       await user.save();
-      res.status(201).json({ msg: "reg succesfully" });
+
+      const payload = { userId: user._id, isAdmin: user.isAdmin };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      res.status(201).json({ msg: "reg succesfully", token });
     }
   } catch (err) {
     console.error(err);
