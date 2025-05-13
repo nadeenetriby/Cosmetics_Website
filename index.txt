@@ -1,0 +1,43 @@
+Project Overview
+
+    Brief description of the backend project
+
+    Tech stack used
+
+Features
+
+    User authentication (JWT & bcrypt)
+
+    CRUD operations for products, users, and orders
+
+    API documentation via Postman
+
+Installation
+
+    Prerequisites
+
+    Steps to run the project locally
+
+Environment Variables
+
+    .env setup
+
+    Required keys (e.g., PORT, DB_URI, JWT_SECRET)
+
+API Endpoints
+
+    Auth routes
+
+    Product routes
+
+    User routes
+
+    Order routes
+
+Database
+
+    MongoDB schema structure
+
+Folder Structure
+
+    Overview of folders and files (routes, controllers, models, etc.)
