@@ -8,6 +8,9 @@ const admin = require("./Admin/admin");
 const reviews = require("./routes/reviews");
 const product = require("./routes/products");
 
+const usercart = require("./routes/cart");
+
+
 // Load environment variables from .env file
 dotenv.config();
 
@@ -39,9 +42,28 @@ app.use("/api/user", userRoutes);
 app.use("/api/product", product);
 app.use("/api/product/reviews", reviews);
 
+app.use("/api/user/cart", usercart);
+
+
 // Basic route (optional, for testing purposes)
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Hello from our cosmatic website!");
+});
+
+
+// PageNotFound middleware
+app.use((req, res, next) => {
+	const error = new Error('Page not found');
+	error.status = 404;
+	next(error);
+});
+
+// error handler middleware
+app.use((err, req, res, next) => {
+	console.error(err);
+	res.status(err.status || 500).json({
+		message: err.message || 'Internal Server Error'
+	});
 });
 
 const port = 3000; // Or any port of your choice

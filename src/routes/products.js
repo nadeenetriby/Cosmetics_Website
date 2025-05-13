@@ -2,11 +2,23 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/PromoteAuthen");
 const admin = require("../middleware/Adminonly");
-const createProduct = require("../Controllers/productController");
+
+const { createProduct, updateProduct,deleteProduct,viewProducts,SearchForProducts } = require("../Controllers/productController");
+
+
 const Product = require("../models/Product");
 
 //admin creates a new product
 router.post("/createProduct", auth, admin, createProduct);
+//admin update specific product
+router.patch("/updateProduct/:id", auth, admin, updateProduct);
+//admin delete specific product
+router.delete("/deleteProduct/:id", auth, admin, deleteProduct)
+//any user can viww products
+router.get("/viewProducts", auth, viewProducts)
+
+//user can search on product by its name (using regex) and category ==> (search and filter)
+router.get("/Search",auth,SearchForProducts)
 
 //get a specific product
 router.get("/:productName", async (req, res) => {

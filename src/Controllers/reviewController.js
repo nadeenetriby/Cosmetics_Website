@@ -27,25 +27,18 @@ const createRev = async (req, res) => {
 
 //get the average rating of reviews for a particular product
 
-const averageRating = async (req, res) => {
-  const { productId } = req.params;
+const averageRating = async (productId) => {
   try {
     const average = await Review.aggregate([
-      //filter by id
       { $match: { product: new mongoose.Types.ObjectId(productId) } },
-      //calculate average
-      //_id: null =====> This is telling MongoDB that we don't want to group by any specific field.
       { $group: { _id: null, averageRating: { $avg: "$rating" } } },
     ]);
-    if (average.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "No reviews found for this product." });
-    }
-    res.status(200).json({ averageRating: average[0].averageRating });
+    return average.length > 0 ? average[0].averageRating : 0;
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error calculating average rating:", error.message);
+    return 0;
   }
 };
 
-module.exports = { createRev, averageRating };
+
+module.exports = {createRev, averageRating };
