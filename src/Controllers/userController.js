@@ -62,7 +62,24 @@ const login = async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 };
-module.exports = { register, login };
+
+const getuserInfo=async(req,res)=>{
+  try{
+    const userId=req.user._id;
+
+    const user=await User.findById(userId).select("-password");
+    if(!user) return res.status(404).json({msg:"user not found"})
+
+    res.json(user)  
+  }
+  catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Server error" });
+  }
+}
+
+
+module.exports = { register, login ,getuserInfo };
 
 /* Token Flow
 

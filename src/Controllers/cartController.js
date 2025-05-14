@@ -11,6 +11,11 @@ const addToCart = async (req, res) => {
     const product = await Product.findById(productId);
     if (!product) return res.status(404).json({ message: "Product not found" });
 
+    //ensure that quantity does not exceed instock  
+    if (quantity > product.inStock) {
+      return res.status(400).json({ message: "Requested quantity exceeds available stock" });
+    }
+
     const price = product.price;
 
     /*check if he already had a cart  if not

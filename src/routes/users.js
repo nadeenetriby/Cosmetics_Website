@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const User = require("../models/User");
-const { register, login } = require("../Controllers/userController");
+const { register, login ,getuserInfo} = require("../Controllers/userController");
+
 
 const auth = require("../middleware/PromoteAuthen");
 
@@ -34,4 +35,5 @@ router.put("/promoteEmail", auth, async (req, res) => {
   }
 });
 
+router.get("/userInfo",auth,getuserInfo);
 module.exports = router;
