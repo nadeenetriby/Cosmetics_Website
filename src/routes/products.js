@@ -15,10 +15,10 @@ router.patch("/updateProduct/:id", auth, admin, updateProduct);
 //admin delete specific product
 router.delete("/deleteProduct/:id", auth, admin, deleteProduct)
 //any user can viww products
-router.get("/viewProducts", auth, viewProducts)
+router.get("/viewProducts",viewProducts)
 
 //user can search on product by its name (using regex) and category ==> (search and filter)
-router.get("/Search",auth,SearchForProducts)
+router.get("/Search",SearchForProducts)
 
 //get a specific product
 router.get("/:productName", async (req, res) => {
