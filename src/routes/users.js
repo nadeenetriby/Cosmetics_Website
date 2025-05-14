@@ -7,7 +7,10 @@ const { register, login ,getuserInfo} = require("../Controllers/userController")
 
 const auth = require("../middleware/PromoteAuthen");
 
-// Define the POST /register route
+/* 
+const { updateUserProfilePicture } = require('../Controllers/imagesController');
+const cloudinary = require('../claudinary/cloudinary'); */
+
 router.post("/register", register);
 router.post("/login", login);
 
@@ -36,4 +39,8 @@ router.put("/promoteEmail", auth, async (req, res) => {
 });
 
 router.get("/userInfo",auth,getuserInfo);
+
+
+//router.put('/profile/:userId', cloudinary.uploader.upload('image'), updateUserProfilePicture);
+
 module.exports = router;
