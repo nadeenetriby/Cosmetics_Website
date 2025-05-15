@@ -2,14 +2,19 @@ const express = require("express");
 const router = express.Router();
 
 const User = require("../models/User");
-const { register, login ,getuserInfo} = require("../Controllers/userController");
-
+const {
+  register,
+  login,
+  getuserInfo,
+} = require("../Controllers/userController");
 
 const auth = require("../middleware/PromoteAuthen");
 
-/* 
-const { updateUserProfilePicture } = require('../Controllers/imagesController');
-const cloudinary = require('../claudinary/cloudinary'); */
+const {
+  updateUserProfilePicture,
+  deleteProfilePicture,
+} = require("../Controllers/imagesController");
+//const cloudinary = require('../claudinary/cloudinary');
 
 router.post("/register", register);
 router.post("/login", login);
@@ -38,9 +43,10 @@ router.put("/promoteEmail", auth, async (req, res) => {
   }
 });
 
-router.get("/userInfo",auth,getuserInfo);
+router.get("/userInfo", auth, getuserInfo);
 
+router.put("/profile/:userId", updateUserProfilePicture);
 
-//router.put('/profile/:userId', cloudinary.uploader.upload('image'), updateUserProfilePicture);
+router.delete("/profile/:userId/delete", deleteProfilePicture);
 
 module.exports = router;

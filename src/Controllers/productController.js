@@ -8,10 +8,14 @@ const createProduct = async (req, res) => {
 
     let cloudinaryResponse = null;
     let imageUrl = "";
-   if (image) {
-			cloudinaryResponse = await cloudinary.uploader.upload(image, { folder: "products" });
-      imageUrl = cloudinaryResponse?.secure_url? cloudinaryResponse.secure_url: "";
-		}
+    if (image) {
+      cloudinaryResponse = await cloudinary.uploader.upload(image, {
+        folder: "products",
+      });
+      imageUrl = cloudinaryResponse?.secure_url
+        ? cloudinaryResponse.secure_url
+        : "";
+    }
 
     const newProduct = await new Product({
       name,
